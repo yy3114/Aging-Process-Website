@@ -95,8 +95,7 @@
             padding-right: 1rem; /* Maintain right padding */
         }
 
-
-        /* Modal Styles - Shared for both welcome and info modals */
+        /* Modal Styles */
         .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
@@ -188,7 +187,7 @@
             color: #4a5568;
         }
 
-        .modal-footer-message { /* New style for "The Pee Press" text */
+        .modal-footer-message { /* Style for "The Pee Press" text */
             text-align: center;
             font-weight: bold;
             color: #333;
@@ -425,7 +424,7 @@
                     </ul>
                 `
             },
-            prostate: { // NEW PROSTATE DATA
+            prostate: {
                 title: "攝護腺老化",
                 physiology: `
                     <h3>生理學變化：</h3>
@@ -461,14 +460,16 @@
 
         // Get modal elements
         const infoModal = document.getElementById('infoModal');
-        const modalTitle = infoModal.querySelector('#modalTitle'); // Get title within infoModal
-        const modalContent = infoModal.querySelector('#modalContent'); // Get content within infoModal
+        const modalTitle = infoModal.querySelector('#modalTitle');
+        const modalContent = infoModal.querySelector('#modalContent');
 
         // Function to open the organ info modal
         function openModal(organ) {
             const data = organData[organ];
             if (data) {
-                modalTitle.textContent = data.title + "老化資訊";
+                // Remove '老化' from the title if it exists, then append '老化資訊'
+                const cleanTitle = data.title.replace('老化', '');
+                modalTitle.textContent = cleanTitle + "老化資訊";
                 modalContent.innerHTML = `
                     ${data.physiology}
                     ${data.pathology}
